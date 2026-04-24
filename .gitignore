@@ -1,0 +1,11 @@
+# Local editor history
+.history/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Secrets — never commit the GitHub App private key
+*.pem

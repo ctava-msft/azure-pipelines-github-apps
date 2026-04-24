@@ -1,0 +1,128 @@
+# =============================================================================
+# Humana POC: Azure Pipelines authenticating to GitHub via a GitHub App.
+# - Mints a short-lived installation access token at runtime (no PATs).
+# - Token is emitted as a MASKED, isOutput pipeline variable.
+# - Token is revoked in an always() cleanup step.
+#
+# Inspired by tspascoal/azure-pipelines-create-github-app-token-task; see
+# specification.md §10 for the reuse map.
+# =============================================================================
+
+# Manual-trigger only for the POC. Real pipelines would have CI/PR triggers.
+trigger: none
+pr: none
+
+parameters:
+  - name: runOptionalPush
+    displayName: "Stretch goal: push a generated metadata file to the sandbox repo"
+    type: boolean
+    default: false
+
+variables:
+  # Variable group expected to contain:
+  #   GITHUB_APP_CLIENT_ID  (secret)  — App Client ID (Iv23... or numeric App ID)
+  #   GITHUB_OWNER          — org login (e.g. 'humana-sandbox')
+  #   GITHUB_REPOS          — comma-separated repos the App is installed on
+  #   GITHUB_TEST_REPO      — one repo from GITHUB_REPOS for the read demo
+  - group: github-app-poc
+
+  # Minimal permission set requested at token-mint time.
+  # MUST be <= the GitHub App's configured permissions.
+  - name: GITHUB_TOKEN_PERMISSIONS
+    value: '{"contents":"read","metadata":"read"}'
+
+pool:
+  vmImage: windows-latest   # PowerShell 7 preinstalled
+
+jobs:
+  - job: github_app_poc
+    displayName: GitHub App auth POC
+    steps:
+
+      # -----------------------------------------------------------------------
+      # 1. Pull the GitHub App private key out of Azure DevOps Secure Files.
+      #    The file lands in $(Agent.TempDirectory) and is wiped with the job.
+      # -----------------------------------------------------------------------
+      - task: DownloadSecureFile@1
+        name: pem
+        displayName: Download GitHub App private key (PEM)
+        inputs:
+          secureFile: github-app.pem
+
+      # -----------------------------------------------------------------------
+      # 2. Mint the installation access token.
+      #    Outputs (consumed by later steps via dependencies):
+      #      mintToken.installationToken   (SECRET, masked)
+      #      mintToken.installationId
+      #      mintToken.tokenExpiration
+      # -----------------------------------------------------------------------
+      - task: PowerShell@2
+        name: mintToken
+        displayName: "Step 2 — Generate GitHub App installation token"
+        inputs:
+          pwsh: true
+          filePath: scripts/create-github-app-token.ps1
+          arguments: >
+            -AppClientId "$(GITHUB_APP_CLIENT_ID)"
+            -PrivateKeyPath "$(pem.secureFilePath)"
+            -Owner "$(GITHUB_OWNER)"
+            -Repositories "$(GITHUB_REPOS)"
+            -Permissions '$(GITHUB_TOKEN_PERMISSIONS)'
+
+      # -----------------------------------------------------------------------
+      # 3. Validate: call GET /app as the installation. Should be 200.
+      #    Demonstrates that the masked variable is consumable downstream.
+      # -----------------------------------------------------------------------
+      - task: PowerShell@2
+        displayName: "Step 3 — Validate token (read-only)"
+        inputs:
+          pwsh: true
+          filePath: scripts/validate-token.ps1
+        env:
+          # Pass the secret via env, never as a command-line arg (would log).
+          GH_TOKEN: $(mintToken.installationToken)
+
+      # -----------------------------------------------------------------------
+      # 4. Use the token to read repo metadata. Mirrors a typical real-world
+      #    "automation needs to inspect a repo" scenario.
+      # -----------------------------------------------------------------------
+      - task: PowerShell@2
+        displayName: "Step 4 — Call GitHub API (read repo metadata + branches)"
+        inputs:
+          pwsh: true
+          filePath: scripts/call-github-api.ps1
+          arguments: >
+            -Owner "$(GITHUB_OWNER)"
+            -Repo "$(GITHUB_TEST_REPO)"
+        env:
+          GH_TOKEN: $(mintToken.installationToken)
+
+      # -----------------------------------------------------------------------
+      # 5. (Optional, gated) Stretch goal: commit a generated metadata file
+      #     to a sandbox repo using the installation token as the Git creds.
+      # -----------------------------------------------------------------------
+      - task: PowerShell@2
+        displayName: "Step 5 (optional) — Controlled push to sandbox repo"
+        condition: and(succeeded(), eq('${{ parameters.runOptionalPush }}', 'true'))
+        inputs:
+          pwsh: true
+          filePath: scripts/optional-git-push.ps1
+          arguments: >
+            -Owner "$(GITHUB_OWNER)"
+            -Repo "$(GITHUB_TEST_REPO)"
+            -Branch "automation/poc-metadata"
+        env:
+          GH_TOKEN: $(mintToken.installationToken)
+
+      # -----------------------------------------------------------------------
+      # 6. ALWAYS revoke the token at end of job, even on failure.
+      #    Best-effort: never fails the build.
+      # -----------------------------------------------------------------------
+      - task: PowerShell@2
+        displayName: "Step 6 — Revoke installation token (always)"
+        condition: always()
+        inputs:
+          pwsh: true
+          filePath: scripts/revoke-github-app-token.ps1
+        env:
+          GH_TOKEN: $(mintToken.installationToken)

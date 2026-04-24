@@ -1,0 +1,24 @@
+# =============================================================================
+# Sample variable template — drop into another pipeline that wants to consume
+# the GitHub App token-mint pattern.
+#
+# Usage:
+#   variables:
+#     - template: samples/example-variable-template.yml
+# =============================================================================
+
+variables:
+  # Variable group with the GitHub App credentials & target config.
+  # See docs/setup-guide.md §3 for the schema.
+  - group: github-app-poc
+
+  # Default token permissions. Override in the consuming pipeline if you need
+  # write access (e.g. '{"contents":"write","pull_requests":"write"}').
+  # MUST be <= the App's configured permissions or the mint call returns 422.
+  - name: GITHUB_TOKEN_PERMISSIONS
+    value: '{"contents":"read","metadata":"read"}'
+
+  # Default scope: comma-separated repo names.
+  # Empty string = all repos the App is installed on (broader; avoid for prod).
+  - name: GITHUB_TOKEN_REPOS
+    value: $(GITHUB_REPOS)

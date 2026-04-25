@@ -32,7 +32,7 @@ variables:
     value: '{"contents":"read","metadata":"read"}'
 
 pool:
-  vmImage: windows-latest   # PowerShell 7 preinstalled
+  name: Default            # self-hosted Windows agent (PowerShell 7 required)
 
 jobs:
   - job: github_app_poc

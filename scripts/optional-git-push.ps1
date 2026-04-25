@@ -34,6 +34,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$env:PSModulePath = 'C:\Program Files\PowerShell\7\Modules;C:\Program Files\PowerShell\Modules'
 Set-StrictMode -Version Latest
 
 Write-Host "=== Stretch: controlled push to $Owner/$Repo on branch $Branch ==="

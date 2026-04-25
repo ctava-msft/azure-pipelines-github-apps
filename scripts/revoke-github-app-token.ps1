@@ -9,6 +9,7 @@
 
 $ErrorActionPreference = 'Continue'
 Set-StrictMode -Version Latest
+$env:PSModulePath = 'C:\Program Files\PowerShell\7\Modules;C:\Program Files\PowerShell\Modules'
 
 Write-Host "=== Revoke token (always) ==="
 

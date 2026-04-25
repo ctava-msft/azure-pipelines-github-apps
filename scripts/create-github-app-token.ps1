@@ -35,6 +35,10 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
+# Avoid loading Windows PowerShell 5.1 modules into pwsh 7 (causes
+# duplicate System.Security.AccessControl.ObjectSecurity type errors).
+$env:PSModulePath = 'C:\Program Files\PowerShell\7\Modules;C:\Program Files\PowerShell\Modules'
+
 Write-Host "=== Generate GitHub App installation token ==="
 
 # ----- 1. Build a JWT signed with the App private key (RS256, ~9 min) --------

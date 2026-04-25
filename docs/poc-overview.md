@@ -4,7 +4,7 @@
 Prove that an Azure DevOps Pipeline can authenticate to GitHub using a **GitHub App** — minting a short-lived installation access token at runtime — and use that token to perform controlled GitHub operations without ever using a PAT.
 
 ## Problem
-Humana runs a coexistence model: Azure DevOps Pipelines is the system of control, GitHub is the source of truth for code. Pipelines that need to call the GitHub API beyond the built-in checkout/status integration default to **PATs**, which are long-lived, user-owned, broadly scoped, and a recurring audit finding.
+Customer runs a coexistence model: Azure DevOps Pipelines is the system of control, GitHub is the source of truth for code. Pipelines that need to call the GitHub API beyond the built-in checkout/status integration default to **PATs**, which are long-lived, user-owned, broadly scoped, and a recurring audit finding.
 
 ## Why a GitHub App
 - Org-owned credential (survives user churn).

@@ -55,8 +55,8 @@ try {
     git clone --quiet --depth 1 $remote repo
     Set-Location repo
 
-    git config user.email "humana-azpipelines-poc[bot]@users.noreply.github.com"
-    git config user.name  "humana-azpipelines-poc[bot]"
+    git config user.email "customer-azpipelines-poc[bot]@users.noreply.github.com"
+    git config user.name  "customer-azpipelines-poc[bot]"
 
     # Create / switch to the feature branch
     git checkout -B $Branch | Out-Null
@@ -68,7 +68,7 @@ try {
         buildId        = $env:BUILD_BUILDID
         buildNumber    = $env:BUILD_BUILDNUMBER
         pipeline       = $env:BUILD_DEFINITIONNAME
-        source         = 'humana-azpipelines-poc'
+        source         = 'customer-azpipelines-poc'
     } | ConvertTo-Json -Depth 3
     Set-Content -Path "$metaDir/last-run.json" -Value $payload -Encoding UTF8
 

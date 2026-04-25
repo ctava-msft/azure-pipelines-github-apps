@@ -13,7 +13,7 @@ End-to-end steps for a platform engineer to reproduce the POC.
 
 1. In your GitHub org → **Settings → Developer settings → GitHub Apps → New GitHub App**.
 2. Fill in:
-   - **Name**: `humana-azpipelines-poc` (or similar)
+   - **Name**: `customer-azpipelines-poc` (or similar)
    - **Homepage URL**: any internal URL.
    - **Webhook**: **uncheck "Active"** (we don't need webhooks for this POC).
 3. **Repository permissions** — request the minimum needed. For the read POC:
@@ -40,7 +40,7 @@ End-to-end steps for a platform engineer to reproduce the POC.
    | Name | Value | Secret? |
    |---|---|---|
    | `GITHUB_APP_CLIENT_ID` | the **Client ID** from step 2.5 (e.g. `Iv23li...`) | ✅ |
-   | `GITHUB_OWNER` | the GitHub org login (e.g. `humana-sandbox`) | ❌ |
+   | `GITHUB_OWNER` | the GitHub org login (e.g. `customer-sandbox`) | ❌ |
    | `GITHUB_REPOS` | comma-separated repo names the App is installed on (e.g. `automation-sandbox`) | ❌ |
    | `GITHUB_TEST_REPO` | one repo from the list above to use for the read demo | ❌ |
 4. Save. Authorize the pipeline to use the variable group when prompted on first run.
@@ -79,7 +79,7 @@ Token minted. Expires: 2026-04-23T18:42:11Z
 ##vso[task.setvariable variable=tokenExpiration;isOutput=true]2026-04-23T18:42:11Z
 
 === Validate token ===
-GET /app -> 200 OK ; app slug: humana-azpipelines-poc
+GET /app -> 200 OK ; app slug: customer-azpipelines-poc
 
 === Call GitHub API ===
 GET /repos/<owner>/<repo> -> 200 OK

@@ -30,7 +30,7 @@ $headers = @{
     Authorization = "Bearer $env:GH_TOKEN"
     Accept        = 'application/vnd.github+json'
     'X-GitHub-Api-Version' = '2022-11-28'
-    'User-Agent'  = 'humana-azpipelines-poc'
+    'User-Agent'  = 'customer-azpipelines-poc'
 }
 
 # 1. Repo metadata

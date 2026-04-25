@@ -1,5 +1,5 @@
 # =============================================================================
-# Humana POC: Azure Pipelines authenticating to GitHub via a GitHub App.
+# Customer POC: Azure Pipelines authenticating to GitHub via a GitHub App.
 # - Mints a short-lived installation access token at runtime (no PATs).
 # - Token is emitted as a MASKED, isOutput pipeline variable.
 # - Token is revoked in an always() cleanup step.
@@ -21,7 +21,7 @@ parameters:
 variables:
   # Variable group expected to contain:
   #   GITHUB_APP_CLIENT_ID  (secret)  — App Client ID (Iv23... or numeric App ID)
-  #   GITHUB_OWNER          — org login (e.g. 'humana-sandbox')
+  #   GITHUB_OWNER          — org login (e.g. 'customer-sandbox')
   #   GITHUB_REPOS          — comma-separated repos the App is installed on
   #   GITHUB_TEST_REPO      — one repo from GITHUB_REPOS for the read demo
   - group: github-app-poc

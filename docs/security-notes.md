@@ -32,7 +32,7 @@ An attacker with one of: (a) write access to the pipeline YAML, (b) shell on the
 
 ## Audit trail
 
-All token-mint and API calls show up in the GitHub org **audit log** as the App identity (e.g. `humana-azpipelines-poc[bot]`). Recommend forwarding GitHub audit logs to Humana's SIEM and alerting on:
+All token-mint and API calls show up in the GitHub org **audit log** as the App identity (e.g. `customer-azpipelines-poc[bot]`). Recommend forwarding GitHub audit logs to Customer's SIEM and alerting on:
 - Tokens minted from IPs outside expected Azure DevOps egress ranges.
 - Tokens minted at unusual hours.
 - Permission elevation attempts (App settings change).

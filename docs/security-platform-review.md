@@ -5,7 +5,7 @@ real workload at it.
 
 ## GitHub App configuration
 
-- [ ] App is owned by a Humana **organization** (not an individual GitHub user).
+- [ ] App is owned by a Customer **organization** (not an individual GitHub user).
 - [ ] App permissions are documented and **minimum-necessary** for the use case.
 - [ ] App is installed on **specific repositories**, not "All repositories", unless explicitly justified.
 - [ ] App webhook is **disabled** (or, if enabled, the webhook URL is reviewed).
@@ -18,7 +18,7 @@ real workload at it.
 - [ ] Variable group `github-app-poc` has `GITHUB_APP_CLIENT_ID` flagged as **secret**.
 - [ ] Variable group is restricted to the POC pipeline.
 - [ ] Pipeline is defined in a branch protected by required reviewers.
-- [ ] Agent pool is approved for handling secrets (Microsoft-hosted **or** a hardened Humana self-hosted pool).
+- [ ] Agent pool is approved for handling secrets (Microsoft-hosted **or** a hardened Customer self-hosted pool).
 
 ## Pipeline behavior
 

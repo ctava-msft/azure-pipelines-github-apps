@@ -1,4 +1,4 @@
-# Humana POC — Azure Pipelines ↔ GitHub App Authentication
+# Customer POC — Azure Pipelines ↔ GitHub App Authentication
 
 > Master design document. All other docs in this repo derive from this file.
 
@@ -17,7 +17,7 @@ The implementation is intentionally minimal:
 
 The reference project [`tspascoal/azure-pipelines-create-github-app-token-task`](https://github.com/tspascoal/azure-pipelines-create-github-app-token-task) is used as conceptual inspiration (input shape, service-connection idea, output variable names). We deliberately **do not require** a published Azure DevOps extension for the POC, because:
 
-- Humana would need to package, sign, and publish a private extension before use.
+- Customer would need to package, sign, and publish a private extension before use.
 - The same security properties can be achieved with ~80 lines of inline PowerShell.
 - A future "productionization" step can swap our inline script for the packaged task with **no pipeline changes** other than the task reference (we keep the same output variable names: `installationToken`, `installationId`, `tokenExpiration`).
 
@@ -25,7 +25,7 @@ The reference project [`tspascoal/azure-pipelines-create-github-app-token-task`]
 
 ## 2. Problem Statement
 
-Humana operates in a **coexistence model**:
+Customer operates in a **coexistence model**:
 
 - Azure DevOps Pipelines = system of control for CI/CD and release governance.
 - GitHub = source of truth for code, collaboration, and innovation.
@@ -127,10 +127,10 @@ Azure Pipelines already supports a "GitHub App" service connection used for:
 ## 6. Security Boundaries & Assumptions
 
 ### Assumptions
-- The GitHub App is **owned by a Humana GitHub org**, not an individual.
+- The GitHub App is **owned by a Customer GitHub org**, not an individual.
 - The App's private key is stored as an **Azure DevOps Secure File** with restricted pipeline permissions.
-- The Azure DevOps project, agent pool, and service connections follow Humana's existing access-control standards.
-- The pipeline runs on a **trusted agent** (Microsoft-hosted or Humana-managed self-hosted). The agent is treated as a trust boundary — anyone with shell on the agent during the run can read the token.
+- The Azure DevOps project, agent pool, and service connections follow Customer's existing access-control standards.
+- The pipeline runs on a **trusted agent** (Microsoft-hosted or Customer-managed self-hosted). The agent is treated as a trust boundary — anyone with shell on the agent during the run can read the token.
 
 ### Boundaries enforced by this design
 - Private key **never appears** in a pipeline log, repo, or variable expansion.
@@ -153,7 +153,7 @@ Azure Pipelines already supports a "GitHub App" service connection used for:
 | Area | Limitation |
 |---|---|
 | Extension packaging | We use inline scripts, not a published Azure DevOps task. Trade-off: simpler to review, but less reusable across many pipelines. |
-| Proxy support | Not implemented (reference repo handles `HTTP_PROXY`/`HTTPS_PROXY`). Add if Humana's agents are behind a forward proxy. |
+| Proxy support | Not implemented (reference repo handles `HTTP_PROXY`/`HTTPS_PROXY`). Add if Customer's agents are behind a forward proxy. |
 | Enterprise installs | Only `org` account type is implemented. |
 | GHES | Hardcoded to `https://api.github.com`. Parameterize for GHES. |
 | Pagination | `GET /app/installations` is not paginated in our script (fine for ≤ 30 installations). |
@@ -164,9 +164,9 @@ Azure Pipelines already supports a "GitHub App" service connection used for:
 ## 8. Next-Step Path If The POC Succeeds
 
 1. **Harden as a shared template**
-   Move `azure-pipelines.poc.yml` and the scripts into a Humana-internal template repo; consume via `extends` / `template:` in product pipelines.
+   Move `azure-pipelines.poc.yml` and the scripts into a Customer-internal template repo; consume via `extends` / `template:` in product pipelines.
 2. **Package as a private Azure DevOps extension**
-   Adopt the reference repo's TypeScript task and publish as a private extension under a Humana publisher ID. This gives a single `task: create-github-app-token@1` line per pipeline. Output variable names are already aligned.
+   Adopt the reference repo's TypeScript task and publish as a private extension under a Customer publisher ID. This gives a single `task: create-github-app-token@1` line per pipeline. Output variable names are already aligned.
 3. **Add a "GitHub App" service connection type**
    The reference repo includes the manifest for a custom service connection. This removes the need for a Secure File per pipeline.
 4. **Centralize key management**
@@ -174,7 +174,7 @@ Azure Pipelines already supports a "GitHub App" service connection used for:
 5. **Onboard real workloads**
    Pilot with: PR labelers, release-note generators, repo metadata sync, deployment status reporters, etc.
 6. **Audit & telemetry**
-   Pipe GitHub audit-log events for the App into Humana's SIEM. Alert on tokens minted outside expected pipelines.
+   Pipe GitHub audit-log events for the App into Customer's SIEM. Alert on tokens minted outside expected pipelines.
 
 ---
 
@@ -252,7 +252,7 @@ The POC passes if **all** of the following are true after a single pipeline run:
 
 **Not appropriate for:**
 - Repos with branch protection requiring code-owner review (the App identity bypasses humans → audit/governance concern).
-- Anything touching production config, IaC, or compliance-sensitive paths without explicit Humana approval and a CODEOWNERS-enforced review path.
+- Anything touching production config, IaC, or compliance-sensitive paths without explicit Customer approval and a CODEOWNERS-enforced review path.
 - Any operation that should be attributable to a human author.
 
 ---

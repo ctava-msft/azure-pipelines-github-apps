@@ -46,14 +46,6 @@ jobs:
     displayName: GitHub App auth POC
     steps:
 
-      # ----- DIAGNOSTIC: cmd-based pwsh invocation (bypasses PowerShell@2) -----
-      - script: |
-          echo === PSModulePath (cmd) ===
-          echo %PSModulePath%
-          echo === pwsh test ===
-          pwsh -NoProfile -Command "$env:PSModulePath -split ';' | ForEach-Object { '[' + $_ + ']' }; ConvertTo-SecureString 'x' -AsPlainText -Force | Out-Null; 'OK'"
-        displayName: "DEBUG: env diagnostic via cmd"
-
       # -----------------------------------------------------------------------
       # 1. Pull the GitHub App private key out of Azure DevOps Secure Files.
       #    The file lands in $(Agent.TempDirectory) and is wiped with the job.

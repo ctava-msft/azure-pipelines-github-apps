@@ -57,12 +57,11 @@ jobs:
           secureFile: github-app.pem
 
       - script: |
-          echo === cmd env ===
+          echo === cmd-only env ===
           echo PSMODULEPATH=%PSMODULEPATH%
           echo POWERSHELL_TELEMETRY_OPTOUT=%POWERSHELL_TELEMETRY_OPTOUT%
           where pwsh
-          pwsh -NoProfile -Command "Write-Host PSVersion=$($PSVersionTable.PSVersion); Write-Host PSHOME=$PSHOME; Write-Host 'EFFECTIVE PSModulePath:'; $env:PSModulePath -split ';' | ForEach-Object { Write-Host \"  $_\" }; Write-Host 'Microsoft.PowerShell.Security candidates:'; foreach ($p in ($env:PSModulePath -split ';')) { $c = Join-Path $p 'Microsoft.PowerShell.Security'; if (Test-Path $c) { Write-Host \"  HIT $c\" } }"
-        displayName: 'DEBUG: pwsh env probe'
+        displayName: 'DEBUG: cmd env probe'
 
       # -----------------------------------------------------------------------
       # 2. Mint the installation access token.

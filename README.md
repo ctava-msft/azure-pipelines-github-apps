@@ -4,18 +4,18 @@ Proof of concept: mint a short-lived **GitHub App installation token** inside an
 
 ## Quick links
 
-- 📘 Design Specification: [specification.md](specification.md)
+- 📘 Design Specification: [docs/specification.md](docs/specification.md)
 - 📝 POC overview: [docs/poc-overview.md](docs/poc-overview.md)
 - 🛠 Setup guide: [docs/setup-guide.md](docs/setup-guide.md)
 - 🔒 Security notes: [docs/security-notes.md](docs/security-notes.md)
 - 🚀 Pipeline: [azure-pipelines/azure-pipelines.poc.yml](azure-pipelines/azure-pipelines.poc.yml)
-- ✅ Review checklist: [checklists/security-platform-review.md](checklists/security-platform-review.md)
+- ✅ Review checklist: [docs/security-platform-review.md](docs/security-platform-review.md)
 
 ## Reused from upstream
 
 Patterns and input/output shapes are informed by
 [`tspascoal/azure-pipelines-create-github-app-token-task`](https://github.com/tspascoal/azure-pipelines-create-github-app-token-task).
-See [task-or-extension-source/README.md](task-or-extension-source/README.md) for the full reuse map.
+See [docs/task-or-extenson-source.md](docs/task-or-extenson-source.md) for the full reuse map.
 
 ## What this POC proves
 

@@ -19,7 +19,7 @@ PowerShell script that a reviewer can read in one sitting.
 | `repositories` (comma-separated) input | same script `-Repositories` parameter |
 | `permissions` (JSON) input | same script `-Permissions` parameter |
 | Auto-revoke at job end (upstream `skipTokenRevoke` default `false`) | [`scripts/revoke-github-app-token.ps1`](../scripts/revoke-github-app-token.ps1) + `always()` step |
-| Service-connection idea (`githubAppConnection` input) | Documented as future state in [`../samples/example-service-connection-usage.md`](../samples/example-service-connection-usage.md) |
+| Service-connection idea (`githubAppConnection` input) | Documented as future state in [`example-service-connection-usage.md`](example-service-connection-usage.md) |
 | Per-pipeline example patterns (read repo, push commit) | [`../scripts/call-github-api.ps1`](../scripts/call-github-api.ps1), [`../scripts/optional-git-push.ps1`](../scripts/optional-git-push.ps1) |
 
 ## What we omitted, and why

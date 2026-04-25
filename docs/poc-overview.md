@@ -29,4 +29,4 @@ Customer runs a coexistence model: Azure DevOps Pipelines is the system of contr
 - Sample read-only and (optional) write-path consumers.
 - Documentation and a security checklist suitable for handoff to platform/security teams.
 
-For full architecture, security boundaries, limitations, success criteria, and next steps, see [../specification.md](../specification.md).
+For full architecture, security boundaries, limitations, success criteria, and next steps, see [specification.md](specification.md).

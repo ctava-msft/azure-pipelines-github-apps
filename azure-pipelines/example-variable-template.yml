@@ -4,7 +4,7 @@
 #
 # Usage:
 #   variables:
-#     - template: samples/example-variable-template.yml
+#     - template: azure-pipelines/example-variable-template.yml
 # =============================================================================
 
 variables:

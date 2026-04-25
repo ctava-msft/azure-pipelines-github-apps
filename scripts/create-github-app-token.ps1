@@ -20,7 +20,7 @@
     - JWT is built using only the .NET BCL (RSA + JsonWebTokenHandler not
       required) so this script works on any Windows/Linux agent with PS 7.
     - This script intentionally does NOT support: enterprise installs, GHES,
-      proxies. Add as needed; see specification.md §7.
+      proxies. Add as needed; see docs/specification.md §7.
 #>
 
 [CmdletBinding()]

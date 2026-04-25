@@ -5,7 +5,7 @@
 # - Token is revoked in an always() cleanup step.
 #
 # Inspired by tspascoal/azure-pipelines-create-github-app-token-task; see
-# specification.md §10 for the reuse map.
+# docs/specification.md §10 for the reuse map.
 # =============================================================================
 
 # Manual-trigger only for the POC. Real pipelines would have CI/PR triggers.

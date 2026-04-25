@@ -182,33 +182,27 @@ Azure Pipelines already supports a "GitHub App" service connection used for:
 
 ```
 azure-pipelines-github-apps/
-├── specification.md                       ← this file (master design)
 ├── README.md                              ← entry point / quick links
 │
 ├── docs/
+│   ├── specification.md                   ← this file (master design)
 │   ├── poc-overview.md                    ← exec summary of sections 1–4
 │   ├── setup-guide.md                     ← step-by-step reproduction
-│   └── security-notes.md                  ← reviewer-facing security notes
-│
-├── azure-pipelines/
-│   └── azure-pipelines.poc.yml            ← the working sample pipeline
-│
-├── scripts/
-│   ├── create-github-app-token.ps1        ← JWT + installation token mint
-│   ├── revoke-github-app-token.ps1        ← token cleanup (always() step)
-│   ├── validate-token.ps1                 ← sanity-check the minted token
-│   ├── call-github-api.ps1                ← read-only API demo
-│   └── optional-git-push.ps1              ← stretch: controlled mutation
-│
-├── samples/
-│   ├── example-variable-template.yml      ← variable group / parameter pattern
+│   ├── security-notes.md                  ← reviewer-facing security notes
+│   ├── security-platform-review.md        ← pre-merge review checklist
+│   ├── task-or-extenson-source.md         ← what we reused/skipped from upstream
 │   └── example-service-connection-usage.md ← future-state with extension
 │
-├── task-or-extension-source/
-│   └── README.md                          ← what we reused/skipped from upstream
+├── azure-pipelines/
+│   ├── azure-pipelines.poc.yml            ← the working sample pipeline
+│   └── example-variable-template.yml      ← variable group / parameter pattern
 │
-└── checklists/
-    └── security-platform-review.md        ← pre-merge review checklist
+└── scripts/
+    ├── create-github-app-token.ps1        ← JWT + installation token mint
+    ├── revoke-github-app-token.ps1        ← token cleanup (always() step)
+    ├── validate-token.ps1                 ← sanity-check the minted token
+    ├── call-github-api.ps1                ← read-only API demo
+    └── optional-git-push.ps1              ← stretch: controlled mutation
 ```
 
 ---
@@ -221,10 +215,10 @@ azure-pipelines-github-apps/
 | Output variable names (`installationToken`, `installationId`, `tokenExpiration`) | ✅ Yes | same script, `##vso[task.setvariable]` lines |
 | `repositories` and `permissions` inputs | ✅ Yes | script parameters |
 | Auto-revoke at end of job (`skipTokenRevoke` default = false) | ✅ Yes | `revoke-github-app-token.ps1` + `always()` step |
-| Service-connection type for GitHub App | ⏭ Deferred | `samples/example-service-connection-usage.md` (next-step) |
+| Service-connection type for GitHub App | ⏭ Deferred | `docs/example-service-connection-usage.md` (next-step) |
 | Enterprise installation support | ⏭ Deferred | not needed for POC |
 | Proxy env-var detection | ⏭ Deferred | document as gap |
-| TypeScript task / vss-extension packaging | ❌ Skipped | unnecessary for POC; see `task-or-extension-source/README.md` |
+| TypeScript task / vss-extension packaging | ❌ Skipped | unnecessary for POC; see `docs/task-or-extenson-source.md` |
 | Jest unit tests, coverage gates | ❌ Skipped | out of POC scope |
 
 ---
@@ -240,7 +234,7 @@ The POC passes if **all** of the following are true after a single pipeline run:
 5. ✅ Token value never appears in pipeline logs (verify by searching the log; it should appear as `***`).
 6. ✅ Repo access is limited to the explicitly listed `repositories` (verify by attempting an API call to a repo *not* in scope and observing 404).
 7. ✅ Token is successfully revoked in the `always()` cleanup step (`DELETE /installation/token` → 204).
-8. ✅ A platform engineer unfamiliar with the POC can reproduce it end-to-end using only [docs/setup-guide.md](docs/setup-guide.md).
+8. ✅ A platform engineer unfamiliar with the POC can reproduce it end-to-end using only [setup-guide.md](setup-guide.md).
 
 ---
 
@@ -259,7 +253,7 @@ The POC passes if **all** of the following are true after a single pipeline run:
 
 ## 13. Review-with-Security/Platform Checklist (summary)
 
-Full version: [checklists/security-platform-review.md](checklists/security-platform-review.md)
+Full version: [security-platform-review.md](security-platform-review.md)
 
 - [ ] GitHub App is org-owned, not user-owned.
 - [ ] App permissions documented and minimum-necessary.

@@ -31,6 +31,13 @@ variables:
   - name: GITHUB_TOKEN_PERMISSIONS
     value: '{"contents":"read","metadata":"read"}'
 
+  # On self-hosted Windows agents, the user PSModulePath often includes
+  # Windows PowerShell 5.1 module dirs which cause pwsh 7 to load types
+  # twice ("System.Security.AccessControl.ObjectSecurity" duplicates).
+  # Scope the path to PS 7 modules only.
+  - name: PSModulePath
+    value: 'C:\Program Files\PowerShell\7\Modules;C:\Program Files\PowerShell\Modules'
+
 pool:
   name: Default            # self-hosted Windows agent (PowerShell 7 required)
 

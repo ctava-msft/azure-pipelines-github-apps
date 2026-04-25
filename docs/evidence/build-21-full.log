@@ -146,7 +146,7 @@ Generated: 2026-04-25T15:52:06.7524517Z
 2026-04-25T14:59:11.5009946Z  * branch            4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65 -> FETCH_HEAD
 2026-04-25T14:59:11.5615607Z ##[command]git checkout --progress --force refs/remotes/origin/4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65
 2026-04-25T14:59:11.9252923Z Previous HEAD position was 5f9dc61 Revert global PSModulePath override (broke PS5.1 task host) and drop debug step
-2026-04-25T14:59:11.9317827Z HEAD is now at 4c9e564 Rebrand Humana -> Customer; add programmatic-scale section to README
+2026-04-25T14:59:11.9317827Z HEAD is now at 4c9e564 Rebrand <redacted> -> Customer; add programmatic-scale section to README
 2026-04-25T14:59:11.9720988Z ##[section]Finishing: Checkout ctava-msft/azure-pipelines-github-apps@main to s
 
 

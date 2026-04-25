@@ -1,0 +1,269 @@
+===== Azure Pipelines Build 21 full log =====
+Generated: 2026-04-25T15:52:06.7524517Z
+
+
+===== Initialize job [succeeded] =====
+2026-04-25T14:59:00.3411514Z ##[section]Starting: Initialize job
+2026-04-25T14:59:00.3416022Z Agent name: 'DESKTOP-6R4JEF1-agent'
+2026-04-25T14:59:00.3416985Z Agent machine name: 'DESKTOP-6R4JEF1'
+2026-04-25T14:59:00.3417442Z Current agent version: '4.271.0'
+2026-04-25T14:59:00.3891599Z Agent running as: 'christava'
+2026-04-25T14:59:00.3926067Z Prepare build directory.
+2026-04-25T14:59:00.4971936Z Set build variables.
+2026-04-25T14:59:00.4987465Z Download all required tasks.
+2026-04-25T14:59:00.6732577Z Checking job knob settings.
+2026-04-25T14:59:00.6737535Z    Knob: UseGitLongPaths = true Source: $(USE_GIT_LONG_PATHS) 
+2026-04-25T14:59:00.6739328Z    Knob: UseNode24withHandlerData = True Source: $(DistributedTask.Agent.UseNode24withHandlerData) 
+2026-04-25T14:59:00.6741212Z    Knob: EnableIssueSourceValidation = true Source: $(ENABLE_ISSUE_SOURCE_VALIDATION) 
+2026-04-25T14:59:00.6742128Z    Knob: AgentEnablePipelineArtifactLargeChunkSize = true Source: $(AGENT_ENABLE_PIPELINEARTIFACT_LARGE_CHUNK_SIZE) 
+2026-04-25T14:59:00.6745403Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC) 
+2026-04-25T14:59:00.6745933Z    Knob: ProcessHandlerSecureArguments = false Source: $(AZP_75787_ENABLE_NEW_LOGIC_LOG) 
+2026-04-25T14:59:00.6746492Z    Knob: ProcessHandlerTelemetry = true Source: $(AZP_75787_ENABLE_COLLECT) 
+2026-04-25T14:59:00.6747100Z    Knob: UseNewNodeHandlerTelemetry = True Source: $(DistributedTask.Agent.USENEWNODEHANDLERTELEMETRY) 
+2026-04-25T14:59:00.6747937Z    Knob: ProcessHandlerEnableNewLogic = true Source: $(AZP_75787_ENABLE_NEW_PH_LOGIC) 
+2026-04-25T14:59:00.6749004Z    Knob: EnableResourceMonitorDebugOutput = true Source: $(AZP_ENABLE_RESOURCE_MONITOR_DEBUG_OUTPUT) 
+2026-04-25T14:59:00.6749558Z    Knob: EnableResourceUtilizationWarnings = true Source: $(AZP_ENABLE_RESOURCE_UTILIZATION_WARNINGS) 
+2026-04-25T14:59:00.6750341Z    Knob: IgnoreVSTSTaskLib = true Source: $(AZP_AGENT_IGNORE_VSTSTASKLIB) 
+2026-04-25T14:59:00.6750841Z    Knob: FailJobWhenAgentDies = true Source: $(FAIL_JOB_WHEN_AGENT_DIES) 
+2026-04-25T14:59:00.6751142Z    Knob: EnhancedWorkerCrashHandling = true Source: ${AZP_ENHANCED_WORKER_CRASH_HANDLING} 
+2026-04-25T14:59:00.6751800Z    Knob: CheckForTaskDeprecation = true Source: $(AZP_AGENT_CHECK_FOR_TASK_DEPRECATION) 
+2026-04-25T14:59:00.6752504Z    Knob: CheckIfTaskNodeRunnerIsDeprecated246 = True Source: $(DistributedTask.Agent.CheckIfTaskNodeRunnerIsDeprecated246) 
+2026-04-25T14:59:00.6753081Z    Knob: UseNode20ToStartContainer = True Source: $(DistributedTask.Agent.UseNode20ToStartContainer) 
+2026-04-25T14:59:00.6753895Z    Knob: EnableTimeoutLogFlushing = True Source: $(DistributedTask.Agent.EnableTimeoutLogFlushing) 
+2026-04-25T14:59:00.6754639Z    Knob: LogTaskNameInUserAgent = true Source: $(AZP_AGENT_LOG_TASKNAME_IN_USERAGENT) 
+2026-04-25T14:59:00.6755156Z    Knob: UseFetchFilterInCheckoutTask = true Source: $(AGENT_USE_FETCH_FILTER_IN_CHECKOUT_TASK) 
+2026-04-25T14:59:00.6755785Z    Knob: Rosetta2Warning = true Source: $(ROSETTA2_WARNING) 
+2026-04-25T14:59:00.6757206Z    Knob: AddForceCredentialsToGitCheckout = True Source: $(DistributedTask.Agent.AddForceCredentialsToGitCheckout) 
+2026-04-25T14:59:00.6758003Z    Knob: AddForceCredentialsToGitCheckoutEnhanced = True Source: $(DistributedTask.Agent.AddForceCredentialsToGitCheckoutEnhanced) 
+2026-04-25T14:59:00.6758891Z    Knob: UseLatestTfExe = True Source: $(DistributedTask.Agent.UseLatestTfExe) 
+2026-04-25T14:59:00.6759527Z    Knob: UseSparseCheckoutInCheckoutTask = true Source: $(AGENT_USE_SPARSE_CHECKOUT_IN_CHECKOUT_TASK) 
+2026-04-25T14:59:00.6760213Z    Knob: AgentCDNConnectivityFailWarning = False Source: $(DistributedTask.Agent.AgentCDNConnectivityFailWarning) 
+2026-04-25T14:59:00.6760649Z    Knob: UseEnhancedLogging = true Source: ${AZP_USE_ENHANCED_LOGGING} 
+2026-04-25T14:59:00.6761385Z Finished checking job knob settings.
+2026-04-25T14:59:00.7331210Z Start tracking orphan processes.
+2026-04-25T14:59:00.7434417Z ##[section]Finishing: Initialize job
+
+
+===== Pre-job: Download GitHub App private key (PEM) [succeeded] =====
+2026-04-25T14:59:00.7800811Z ##[section]Starting: Download GitHub App private key (PEM)
+2026-04-25T14:59:00.7939154Z ==============================================================================
+2026-04-25T14:59:00.7939969Z Task         : Download secure file
+2026-04-25T14:59:00.7940278Z Description  : Download a secure file to the agent machine
+2026-04-25T14:59:00.7940483Z Version      : 1.268.0
+2026-04-25T14:59:00.7940712Z Author       : Microsoft Corporation
+2026-04-25T14:59:00.7940973Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/download-secure-file
+2026-04-25T14:59:00.7941178Z ==============================================================================
+2026-04-25T14:59:07.5245979Z ##[section]Finishing: Download GitHub App private key (PEM)
+
+
+===== Checkout ctava-msft/azure-pipelines-github-apps@main to s [succeeded] =====
+2026-04-25T14:59:07.5320043Z ##[section]Starting: Checkout ctava-msft/azure-pipelines-github-apps@main to s
+2026-04-25T14:59:07.5334349Z ==============================================================================
+2026-04-25T14:59:07.5334510Z Task         : Get sources
+2026-04-25T14:59:07.5334574Z Description  : Get sources from a repository. Supports Git, TfsVC, and SVN repositories.
+2026-04-25T14:59:07.5334667Z Version      : 1.0.0
+2026-04-25T14:59:07.5334736Z Author       : Microsoft
+2026-04-25T14:59:07.5335253Z Help         : [More Information](https://go.microsoft.com/fwlink/?LinkId=798199)
+2026-04-25T14:59:07.5335344Z ==============================================================================
+2026-04-25T14:59:07.9320360Z Syncing repository: ctava-msft/azure-pipelines-github-apps (GitHub)
+2026-04-25T14:59:07.9404627Z Prepending Path environment variable with directory containing 'git.exe'.
+2026-04-25T14:59:07.9433212Z ##[command]git version
+2026-04-25T14:59:08.0998619Z git version 2.53.0.windows.1
+2026-04-25T14:59:08.1043013Z ##[command]git lfs version
+2026-04-25T14:59:08.3465094Z git-lfs/3.4.0 (GitHub; windows amd64; go 1.20.6; git d06d6e9e)
+2026-04-25T14:59:08.3536529Z ##[command]git config --get remote.origin.url
+2026-04-25T14:59:08.4772682Z ##[command]git clean -ffdx
+2026-04-25T14:59:08.5935483Z ##[command]git reset --hard HEAD
+2026-04-25T14:59:08.8498818Z HEAD is now at 5f9dc61 Revert global PSModulePath override (broke PS5.1 task host) and drop debug step
+2026-04-25T14:59:08.8585888Z ##[command]git sparse-checkout disable
+2026-04-25T14:59:08.9748650Z ##[command]git config gc.auto 0
+2026-04-25T14:59:09.0717223Z ##[command]git config core.longpaths true
+2026-04-25T14:59:09.0818737Z ##[command]git config --get-all http.https://github.com/ctava-msft/azure-pipelines-github-apps.extraheader
+2026-04-25T14:59:09.2057510Z ##[command]git config --get-all http.extraheader
+2026-04-25T14:59:09.3032325Z ##[command]git config --get-regexp .*extraheader
+2026-04-25T14:59:09.3975392Z ##[command]git config --get-all http.proxy
+2026-04-25T14:59:09.4923670Z ##[command]git config http.version HTTP/1.1
+2026-04-25T14:59:09.5883886Z ##[command]git config --get-all remote.origin.promisor
+2026-04-25T14:59:09.6799927Z ##[command]git config --get-all remote.origin.partialclonefilter
+2026-04-25T14:59:09.7805781Z ##[command]git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1  +4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65:refs/remotes/origin/4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65
+2026-04-25T14:59:10.4469090Z remote: Enumerating objects: 38, done.        
+2026-04-25T14:59:10.4469484Z remote: Counting objects:   2% (1/38)        
+2026-04-25T14:59:10.4470262Z remote: Counting objects:   5% (2/38)        
+2026-04-25T14:59:10.4471198Z remote: Counting objects:   7% (3/38)        
+2026-04-25T14:59:10.4472901Z remote: Counting objects:  10% (4/38)        
+2026-04-25T14:59:10.4473222Z remote: Counting objects:  13% (5/38)        
+2026-04-25T14:59:10.4473505Z remote: Counting objects:  15% (6/38)        
+2026-04-25T14:59:10.4473759Z remote: Counting objects:  18% (7/38)        
+2026-04-25T14:59:10.4473965Z remote: Counting objects:  21% (8/38)        
+2026-04-25T14:59:10.4474180Z remote: Counting objects:  23% (9/38)        
+2026-04-25T14:59:10.4474384Z remote: Counting objects:  26% (10/38)        
+2026-04-25T14:59:10.4474632Z remote: Counting objects:  28% (11/38)        
+2026-04-25T14:59:10.4474924Z remote: Counting objects:  31% (12/38)        
+2026-04-25T14:59:10.4475126Z remote: Counting objects:  34% (13/38)        
+2026-04-25T14:59:10.4475352Z remote: Counting objects:  36% (14/38)        
+2026-04-25T14:59:10.4475589Z remote: Counting objects:  39% (15/38)        
+2026-04-25T14:59:10.4475799Z remote: Counting objects:  42% (16/38)        
+2026-04-25T14:59:10.4476104Z remote: Counting objects:  44% (17/38)        
+2026-04-25T14:59:10.4476342Z remote: Counting objects:  47% (18/38)        
+2026-04-25T14:59:10.4476645Z remote: Counting objects:  50% (19/38)        
+2026-04-25T14:59:10.4478500Z remote: Counting objects:  52% (20/38)        
+2026-04-25T14:59:10.4478770Z remote: Counting objects:  55% (21/38)        
+2026-04-25T14:59:10.4479005Z remote: Counting objects:  57% (22/38)        
+2026-04-25T14:59:10.4479256Z remote: Counting objects:  60% (23/38)        
+2026-04-25T14:59:10.4479530Z remote: Counting objects:  63% (24/38)        
+2026-04-25T14:59:10.4479759Z remote: Counting objects:  65% (25/38)        
+2026-04-25T14:59:10.4480129Z remote: Counting objects:  68% (26/38)        
+2026-04-25T14:59:10.4480366Z remote: Counting objects:  71% (27/38)        
+2026-04-25T14:59:10.4480586Z remote: Counting objects:  73% (28/38)        
+2026-04-25T14:59:10.4480818Z remote: Counting objects:  76% (29/38)        
+2026-04-25T14:59:10.4481227Z remote: Counting objects:  78% (30/38)        
+2026-04-25T14:59:10.4481477Z remote: Counting objects:  81% (31/38)        
+2026-04-25T14:59:10.4481764Z remote: Counting objects:  84% (32/38)        
+2026-04-25T14:59:10.4481996Z remote: Counting objects:  86% (33/38)        
+2026-04-25T14:59:10.4482207Z remote: Counting objects:  89% (34/38)        
+2026-04-25T14:59:10.4482478Z remote: Counting objects:  92% (35/38)        
+2026-04-25T14:59:10.4482675Z remote: Counting objects:  94% (36/38)        
+2026-04-25T14:59:10.4482877Z remote: Counting objects:  97% (37/38)        
+2026-04-25T14:59:10.4483078Z remote: Counting objects: 100% (38/38)        
+2026-04-25T14:59:10.4483362Z remote: Counting objects: 100% (38/38), done.        
+2026-04-25T14:59:10.4483608Z remote: Compressing objects:  10% (1/10)        
+2026-04-25T14:59:10.4483832Z remote: Compressing objects:  20% (2/10)        
+2026-04-25T14:59:10.4484049Z remote: Compressing objects:  30% (3/10)        
+2026-04-25T14:59:10.4484281Z remote: Compressing objects:  40% (4/10)        
+2026-04-25T14:59:10.4484509Z remote: Compressing objects:  50% (5/10)        
+2026-04-25T14:59:10.4484734Z remote: Compressing objects:  60% (6/10)        
+2026-04-25T14:59:10.4484971Z remote: Compressing objects:  70% (7/10)        
+2026-04-25T14:59:10.4485208Z remote: Compressing objects:  80% (8/10)        
+2026-04-25T14:59:10.4485436Z remote: Compressing objects:  90% (9/10)        
+2026-04-25T14:59:10.4485669Z remote: Compressing objects: 100% (10/10)        
+2026-04-25T14:59:10.4486020Z remote: Compressing objects: 100% (10/10), done.        
+2026-04-25T14:59:10.5662417Z remote: Total 21 (delta 10), reused 21 (delta 10), pack-reused 0 (from 0)        
+2026-04-25T14:59:10.8761561Z From https://github.com/ctava-msft/azure-pipelines-github-apps
+2026-04-25T14:59:10.8763506Z  * [new ref]         4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65 -> origin/4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65
+2026-04-25T14:59:10.9386399Z ##[command]git --config-env=http.extraheader=env_var_http.extraheader fetch --force --tags --prune --prune-tags --progress --no-recurse-submodules origin --depth=1  +4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65
+2026-04-25T14:59:11.4047371Z remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)        
+2026-04-25T14:59:11.5009591Z From https://github.com/ctava-msft/azure-pipelines-github-apps
+2026-04-25T14:59:11.5009946Z  * branch            4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65 -> FETCH_HEAD
+2026-04-25T14:59:11.5615607Z ##[command]git checkout --progress --force refs/remotes/origin/4c9e564e4aa5a7fff1243e4ca3f0e8837675cc65
+2026-04-25T14:59:11.9252923Z Previous HEAD position was 5f9dc61 Revert global PSModulePath override (broke PS5.1 task host) and drop debug step
+2026-04-25T14:59:11.9317827Z HEAD is now at 4c9e564 Rebrand Humana -> Customer; add programmatic-scale section to README
+2026-04-25T14:59:11.9720988Z ##[section]Finishing: Checkout ctava-msft/azure-pipelines-github-apps@main to s
+
+
+===== Step 2 — Generate GitHub App installation token [succeeded] =====
+2026-04-25T14:59:11.9769505Z ##[section]Starting: Step 2 — Generate GitHub App installation token
+2026-04-25T14:59:11.9831358Z ==============================================================================
+2026-04-25T14:59:11.9831556Z Task         : PowerShell
+2026-04-25T14:59:11.9831647Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2026-04-25T14:59:11.9831784Z Version      : 2.268.1
+2026-04-25T14:59:11.9831874Z Author       : Microsoft Corporation
+2026-04-25T14:59:11.9831981Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2026-04-25T14:59:11.9832108Z ==============================================================================
+2026-04-25T14:59:15.2411875Z Generating script.
+2026-04-25T14:59:15.4514644Z Formatted command: . 'C:\agent\_work\1\s\scripts\create-github-app-token.ps1' -AppClientId "***" -PrivateKeyPath "C:\agent\_work\_temp\github-app.pem" -Owner "ctava-msft" -Repositories "azure-pipelines-github-apps" -Permissions '{"contents":"read","metadata":"read"}'
+2026-04-25T14:59:15.5046381Z ========================== Starting Command Output ===========================
+2026-04-25T14:59:15.5324617Z ##[command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'C:\agent\_work\_temp\0ffab916-710b-4ee8-ac8a-8652f84dc1b6.ps1'"
+2026-04-25T14:59:16.5163438Z === Generate GitHub App installation token ===
+2026-04-25T14:59:16.6339341Z Generated JWT (length: 466)
+2026-04-25T14:59:16.8969998Z Found installation id: 126840050
+2026-04-25T14:59:17.0620764Z Token minted. Expires: 04/25/2026 15:59:17
+2026-04-25T14:59:17.2699859Z ##[section]Finishing: Step 2 — Generate GitHub App installation token
+
+
+===== Step 3 — Validate token (read-only) [succeeded] =====
+2026-04-25T14:59:17.2807226Z ##[section]Starting: Step 3 — Validate token (read-only)
+2026-04-25T14:59:17.2830309Z ==============================================================================
+2026-04-25T14:59:17.2830512Z Task         : PowerShell
+2026-04-25T14:59:17.2830620Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2026-04-25T14:59:17.2830774Z Version      : 2.268.1
+2026-04-25T14:59:17.2830872Z Author       : Microsoft Corporation
+2026-04-25T14:59:17.2830999Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2026-04-25T14:59:17.2831129Z ==============================================================================
+2026-04-25T14:59:18.8489627Z Generating script.
+2026-04-25T14:59:18.9023942Z Formatted command: . 'C:\agent\_work\1\s\scripts\validate-token.ps1'
+2026-04-25T14:59:18.9524611Z ========================== Starting Command Output ===========================
+2026-04-25T14:59:18.9838046Z ##[command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'C:\agent\_work\_temp\ceb86e52-c8a6-4d60-9361-59c5d4a12496.ps1'"
+2026-04-25T14:59:19.5751848Z === Validate token ===
+2026-04-25T14:59:19.8341898Z Token is valid. Visible repositories: 1
+2026-04-25T14:59:19.8750221Z 
+2026-04-25T14:59:19.8751062Z full_name                              private
+2026-04-25T14:59:19.8751850Z ---------                              -------
+2026-04-25T14:59:19.8752090Z ctava-msft/azure-pipelines-github-apps   False
+2026-04-25T14:59:19.8752174Z 
+2026-04-25T14:59:19.8752270Z 
+2026-04-25T14:59:20.0549725Z ##[section]Finishing: Step 3 — Validate token (read-only)
+
+
+===== Step 4 — Call GitHub API (read repo metadata + branches) [succeeded] =====
+2026-04-25T14:59:20.0583050Z ##[section]Starting: Step 4 — Call GitHub API (read repo metadata + branches)
+2026-04-25T14:59:20.0601212Z ==============================================================================
+2026-04-25T14:59:20.0601387Z Task         : PowerShell
+2026-04-25T14:59:20.0601493Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2026-04-25T14:59:20.0601622Z Version      : 2.268.1
+2026-04-25T14:59:20.0601712Z Author       : Microsoft Corporation
+2026-04-25T14:59:20.0601812Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2026-04-25T14:59:20.0601972Z ==============================================================================
+2026-04-25T14:59:21.5253645Z Generating script.
+2026-04-25T14:59:21.5883514Z Formatted command: . 'C:\agent\_work\1\s\scripts\call-github-api.ps1' -Owner "ctava-msft" -Repo "azure-pipelines-github-apps"
+2026-04-25T14:59:21.6357900Z ========================== Starting Command Output ===========================
+2026-04-25T14:59:21.6683411Z ##[command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'C:\agent\_work\_temp\43b30e50-4247-4926-a9e7-2398e4e8b5f4.ps1'"
+2026-04-25T14:59:22.2566978Z === Call GitHub API ===
+2026-04-25T14:59:22.5186840Z Repo:           ctava-msft/azure-pipelines-github-apps
+2026-04-25T14:59:22.5222037Z Default branch: main
+2026-04-25T14:59:22.5248848Z Visibility:     public
+2026-04-25T14:59:22.5272745Z Archived:       False
+2026-04-25T14:59:22.7389464Z Branches (1 shown):
+2026-04-25T14:59:22.7877818Z 
+2026-04-25T14:59:22.7878481Z name protected
+2026-04-25T14:59:22.7878738Z ---- ---------
+2026-04-25T14:59:22.7878939Z main     False
+2026-04-25T14:59:22.7879031Z 
+2026-04-25T14:59:22.7879110Z 
+2026-04-25T14:59:22.9737871Z ##[section]Finishing: Step 4 — Call GitHub API (read repo metadata + branches)
+
+
+===== Step 5 (optional) — Controlled push to sandbox repo [skipped] =====
+2026-04-25T14:59:22.9789659Z Skipping step due to condition evaluation.
+Evaluating: and(succeeded(), eq('False', 'true'))
+Expanded: and(True, eq('False', 'true'))
+Result: False
+
+
+
+===== Step 6 — Revoke installation token (always) [succeeded] =====
+2026-04-25T14:59:22.9836536Z ##[section]Starting: Step 6 — Revoke installation token (always)
+2026-04-25T14:59:22.9859474Z ==============================================================================
+2026-04-25T14:59:22.9859688Z Task         : PowerShell
+2026-04-25T14:59:22.9860387Z Description  : Run a PowerShell script on Linux, macOS, or Windows
+2026-04-25T14:59:22.9860731Z Version      : 2.268.1
+2026-04-25T14:59:22.9860818Z Author       : Microsoft Corporation
+2026-04-25T14:59:22.9861449Z Help         : https://docs.microsoft.com/azure/devops/pipelines/tasks/utility/powershell
+2026-04-25T14:59:22.9861564Z ==============================================================================
+2026-04-25T14:59:24.3430379Z Generating script.
+2026-04-25T14:59:24.3983337Z Formatted command: . 'C:\agent\_work\1\s\scripts\revoke-github-app-token.ps1'
+2026-04-25T14:59:24.4431486Z ========================== Starting Command Output ===========================
+2026-04-25T14:59:24.4752779Z ##[command]"C:\Program Files\PowerShell\7\pwsh.exe" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -Command ". 'C:\agent\_work\_temp\d50c936e-c8c3-47d6-afc5-46fb21de6152.ps1'"
+2026-04-25T14:59:25.0174574Z === Revoke token (always) ===
+2026-04-25T14:59:25.2383635Z DELETE /installation/token -> 204 NoContent
+2026-04-25T14:59:25.4323290Z ##[section]Finishing: Step 6 — Revoke installation token (always)
+
+
+===== Post-job: Checkout ctava-msft/azure-pipelines-github-apps@main to s [succeeded] =====
+2026-04-25T14:59:25.4358258Z ##[section]Starting: Checkout ctava-msft/azure-pipelines-github-apps@main to s
+2026-04-25T14:59:25.4367834Z ==============================================================================
+2026-04-25T14:59:25.4368041Z Task         : Get sources
+2026-04-25T14:59:25.4368153Z Description  : Get sources from a repository. Supports Git, TfsVC, and SVN repositories.
+2026-04-25T14:59:25.4368299Z Version      : 1.0.0
+2026-04-25T14:59:25.4368402Z Author       : Microsoft
+2026-04-25T14:59:25.4368516Z Help         : [More Information](https://go.microsoft.com/fwlink/?LinkId=798199)
+2026-04-25T14:59:25.4368632Z ==============================================================================
+2026-04-25T14:59:25.7946089Z Cleaning any cached credential from repository: ctava-msft/azure-pipelines-github-apps (GitHub)
+2026-04-25T14:59:25.8078108Z ##[section]Finishing: Checkout ctava-msft/azure-pipelines-github-apps@main to s
+
+
+===== Finalize Job [succeeded] =====
+2026-04-25T14:59:25.8121812Z ##[section]Starting: Finalize Job
+2026-04-25T14:59:25.8138008Z Cleaning up task key
+2026-04-25T14:59:25.8139355Z Start cleaning up orphan processes.
+2026-04-25T14:59:25.8324853Z ##[section]Finishing: Finalize Job
+

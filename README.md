@@ -78,4 +78,30 @@ This is the part that is **fully scriptable** today via the Azure DevOps REST AP
 
 Net result: onboarding pipeline #10,001 is a templated PR, not a ticket.
 
+### Org-cap planning: 4 GitHub orgs × 100 GitHub Apps each
+
+GitHub enforces a soft cap of **100 GitHub Apps owned per org**. With 4 customer orgs, the absolute ceiling is **400 Apps total** — far more than this design needs.
+
+**Design budget per org (recommended):**
+
+| App | Purpose | Count |
+|---|---|---|
+| `customer-azpipelines-prod` | Production CI/CD pipelines (read+write to allowed repos) | 1 |
+| `customer-azpipelines-nonprod` | Dev/staging/sandbox pipelines (read+write, broader repo set) | 1 |
+| `customer-azpipelines-readonly` | Audit, inventory, reporting jobs | 1 |
+| Reserved (e.g. release-bot, security-scan, dependabot-mirror) | Domain-specific automations | 3–5 |
+| **Total per org** | | **~6–8 Apps** |
+
+That's **~24–32 Apps across all 4 orgs**, leaving 70+ headroom per org for future automations. The cap is **not a constraint** for this rollout; it only matters if a team starts treating Apps as throwaway, per-team or per-repo identities (which they should not).
+
+**Rules to stay well under the cap:**
+
+1. **One App per (org × trust tier)**, not per pipeline / team / repo. Trust tiers = prod / non-prod / read-only.
+2. **Scope via installation, not via App.** A single App can be installed on a subset of repos with different permissions per installation; create new installations, not new Apps.
+3. **Permissions on the App = the *maximum* it can ever request.** Token mint can request a *subset* (this POC does — see `GITHUB_TOKEN_PERMISSIONS`). Don't fragment Apps just to narrow permissions.
+4. **Centralize ownership.** All Apps owned by org admins; PEMs live in **Azure Key Vault**; rotation is a single KV secret update per App.
+5. **Inventory + alert.** Run a daily job (`GET /orgs/{org}/installations`, `GET /app` per App) that records App count per org and alerts at >70% of cap (≥70 Apps).
+
+**Cross-org pattern.** When a single pipeline must touch repos in multiple orgs, prefer **one App per org with the same Client ID convention**, mint two tokens in the same job, and target each org with its own token. Do **not** try to register a single App that spans orgs — GitHub doesn't support that, and it would also dilute the audit trail.
+
 

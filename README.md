@@ -89,7 +89,7 @@ GitHub enforces a soft cap of **100 GitHub Apps owned per org**. With 4 customer
 | `customer-azpipelines-prod` | Production CI/CD pipelines (read+write to allowed repos) | 1 |
 | `customer-azpipelines-nonprod` | Dev/staging/sandbox pipelines (read+write, broader repo set) | 1 |
 | `customer-azpipelines-readonly` | Audit, inventory, reporting jobs | 1 |
-| Reserved (e.g. release-bot, security-scan, dependabot-mirror) | Domain-specific automations | 3–5 |
+| `reserved` |  Release-bot, security-scan, dependabot-mirror. Domain-specific automations. | 3–5 |
 | **Total per org** | | **~6–8 Apps** |
 
 That's **~24–32 Apps across all 4 orgs**, leaving 70+ headroom per org for future automations. The cap is **not a constraint** for this rollout; it only matters if a team starts treating Apps as throwaway, per-team or per-repo identities (which they should not).
